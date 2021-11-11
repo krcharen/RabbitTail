@@ -1,16 +1,12 @@
 <?php
 
-namespace Tail\belly;
-
+namespace App\Functions;
 
 class Core
 {
-//https://hufangyun.com/2017/short-url/
-//https://murl.xyz/
-//1000000000   62进制 6位
-//100000000000  62进制 7位
     /**
      * 10进制转换成62进制
+     *
      * @param $hex10
      * @return string
      */
@@ -30,6 +26,7 @@ class Core
 
     /**
      * 62进制10进制
+     *
      * @param $base62
      * @return int|string
      */

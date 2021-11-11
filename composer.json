@@ -6,6 +6,7 @@
   "require": {
     "php": ">=7.4",
     "ext-pdo": "*",
+    "ext-bcmath": "*",
     "geoip2/geoip2": "2.10.0",
     "spatie/array-to-xml": "^2.16"
   },
