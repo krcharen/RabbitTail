@@ -1,0 +1,17 @@
+{
+  "name": "Rabbit Tail",
+  "description": "To shorten your long URL.",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.4",
+    "ext-pdo": "*",
+    "geoip2/geoip2": "2.10.0",
+    "spatie/array-to-xml": "^2.16"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "./app"
+    }
+  }
+}
