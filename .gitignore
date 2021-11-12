@@ -1,4 +1,4 @@
 vendor
 .idea
-
+install/install.lock
 composer.lock

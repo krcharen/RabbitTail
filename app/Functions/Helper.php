@@ -16,7 +16,7 @@ class Helper
             $version = self::VERSION;
         } else if ($type === 'mysql') {
             $pdo = new Connect();
-            return $pdo->connect->getAttribute(\PDO::ATTR_SERVER_VERSION);
+            return $pdo->db->getAttribute(\PDO::ATTR_SERVER_VERSION);
         }
 
         return $version ?? null;
