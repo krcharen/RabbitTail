@@ -6,8 +6,9 @@
 
 ### 安装方式
 
-- 配置数据库连接，配置文件：config/database.php。
-- 在项目根目录下，运行`php install.php`
+- 在根目录下运行命令：`composer install`
+- 配置数据库文件：config/database.php
+- 在根目录下运行命令：`php install.php`
 
 ### Apache 配置
 
