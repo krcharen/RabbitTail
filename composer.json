@@ -5,6 +5,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.4",
+    "ext-json": "*",
     "ext-pdo": "*",
     "ext-bcmath": "*",
     "geoip2/geoip2": "2.10.0",

@@ -1,4 +1,9 @@
 <?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+$uri = $_SERVER['REQUEST_URI'];
+$loader = new \App\Handle\Loader();
+$loader->load($uri);
 
 ?>
 <html lang="en">
@@ -40,9 +45,10 @@
                 cache: false,
                 data: {'url': url},
                 success: function (data) {
-                    console.log(data)
-                    //let r = JSON.parse(data)
-                    //$('#content').html(url);
+                    let result = JSON.parse(data)
+                    if (result.status_code === 200) {
+                        $('#content').html(result.data.url);
+                    }
                 }
             })
 

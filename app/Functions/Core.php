@@ -5,12 +5,12 @@ namespace App\Functions;
 class Core
 {
     /**
-     * 10进制转换成62进制
+     * decimal to 62 base
      *
      * @param $hex10
      * @return string
      */
-    protected function hexTo($hex10)
+    public function hexTo($hex10)
     {
         $number = strval($hex10);
         $map = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -25,12 +25,12 @@ class Core
     }
 
     /**
-     * 62进制10进制
+     * 62 base to decimal
      *
      * @param $base62
      * @return int|string
      */
-    protected function toHex($base62)
+    public function toHex($base62)
     {
         $number = strval($base62);
         $map = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

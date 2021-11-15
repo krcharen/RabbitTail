@@ -22,9 +22,23 @@ class Helper
         return $version ?? null;
     }
 
+    /**
+     * @param int $number
+     */
     public static function create_text_output(int $number)
     {
         $date = date('Y-m-d H:i:s');
-        printf("[%s] 表 %d 创建成功\n", $date, $number);
+        printf("[%s] 数据 %d 创建成功\n", $date, $number);
+    }
+
+    public static function response(int $status_code = 200, string $text = 'success', array $data = [])
+    {
+        $result = [
+            'status_code' => $status_code,
+            'text' => $text,
+            'data' => $data,
+        ];
+
+        return json_encode($result);
     }
 }
