@@ -3,7 +3,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 if (!version_compare(PHP_VERSION, '7.4.0', '>=')) {
-    exit('PHP版本不支持');
+    exit('PHP版本不支持' . PHP_EOL);
 }
 
 if (PHP_SAPI !== 'cli') {
@@ -11,13 +11,13 @@ if (PHP_SAPI !== 'cli') {
 }
 
 if (file_exists('./install/install.lock')) {
-    exit('已执行过安装, 要重新安装请删除相关文件后再执行');
+    exit('已执行过安装, 要重新安装请删除相关文件后再执行' . PHP_EOL);
 }
 
 $helper = new \App\Functions\Helper();
 
 if (floatval($helper::version('mysql')) < 5.6) {
-    exit('MySQL版本太低');
+    exit('MySQL版本太低' . PHP_EOL);
 }
 
 $db = new \App\Functions\Database();
