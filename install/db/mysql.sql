@@ -2,6 +2,7 @@ CREATE TABLE `tail_link` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '序号',
   `url` text CHARACTER SET utf8mb4 COMMENT '长链接',
   `short_code` varchar(16) DEFAULT NULL COMMENT '短链接码',
+  `ip` varchar(64) DEFAULT NULL COMMENT 'ip',
   `type` tinyint(1) unsigned DEFAULT NULL COMMENT '1，系统生成；2，自定义生成',
   `created_at` datetime DEFAULT NULL COMMENT '生成时间',
   `updated_at` datetime DEFAULT NULL COMMENT '更新时间',

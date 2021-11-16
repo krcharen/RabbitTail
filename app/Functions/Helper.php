@@ -41,4 +41,30 @@ class Helper
 
         return json_encode($result);
     }
+
+    /**
+     * @return mixed|string
+     */
+    public static function client_ip()
+    {
+        if (@$_SERVER['HTTP_CLIENT_IP'] && strcasecmp($_SERVER['HTTP_CLIENT_IP'], 'unknown')) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } else {
+            if (@$_SERVER['HTTP_X_FORWARDED_FOR'] && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], 'unknown')) {
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            } else {
+                if ($_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                } else {
+                    if (isset ($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
+                        $ip = $_SERVER['REMOTE_ADDR'];
+                    } else {
+                        $ip = '0.0.0.0';
+                    }
+                }
+            }
+        }
+
+        return $ip;
+    }
 }

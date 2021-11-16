@@ -10,10 +10,13 @@ $next_id = $db->rawSelect("SELECT `value` FROM `tail_options` WHERE `item` = 'ne
 $core = new \App\Functions\Core();
 $short_code = $core->hexTo($next_id);
 
+$helper = new \App\Functions\Helper();
+$ip = $helper::client_ip();
+
 $insert = $update = 0;
 
 if ($short_code) {
-    $i_sql = "INSERT INTO `tail_link` VALUES (NULL,'{$url}','$short_code',1,NOW(),NOW(),NULL);";
+    $i_sql = "INSERT INTO `tail_link` VALUES (NULL,'{$url}','$short_code','$ip',1,NOW(),NOW(),NULL);";
     $insert = $db->rawInsert($i_sql);
     if ($insert) {
         $u_sql = "UPDATE `tail_options` SET `value` = `value`+1 WHERE item = 'next_id'";

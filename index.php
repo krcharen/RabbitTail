@@ -71,7 +71,7 @@ $loader->load($uri);
         function generate() {
             let url = $('#url').val();
             let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
-            if (reg.test(url)) {
+            if (reg.test(decodeURIComponent(url))) {
                 let content = '';
                 $('#url').removeClass('is-invalid').addClass('is-valid');
                 $.ajax({
