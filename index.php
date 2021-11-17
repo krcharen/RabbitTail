@@ -70,7 +70,7 @@ $loader->load($uri);
     <script>
         function generate() {
             let url = $('#url').val();
-            let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+            let reg = /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
             if (reg.test(decodeURIComponent(url))) {
                 let content = '';
                 $('#url').removeClass('is-invalid').addClass('is-valid');
@@ -108,7 +108,7 @@ $loader->load($uri);
         </div>
     </div>
     <div class="enter">
-        <input type="text" id="url" value="" class="form-control" placeholder="长连接网址" required>
+        <input type="text" id="url" value="" class="form-control" placeholder="长连接网址（必须包含http(s)）" required>
         <button type="button" class="btn btn-primary" onclick="generate();">生成链接</button>
     </div>
     <div class="shadow p-3 mb-5 bg-body rounded show">
