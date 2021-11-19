@@ -1,4 +1,5 @@
 vendor
 .idea
+config/database.php
 install/install.lock
 composer.lock
