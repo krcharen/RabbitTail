@@ -1,22 +1,22 @@
-# Rabbit Tail
+# Rabbit Tail (Short URL)
 
-### 简介
+### Introduction
 
-`Rabbit Tail (中文：短尾巴兔子🐇)`主要用来缩短URL链接。将长链接，转换成短链接。
+`Rabbit Tail (Chinese：短尾巴兔子🐇)` Mainly used to shorten URL links. Convert long links into short links.
 
-### 安装方式
+### Install
 
-- 在根目录下运行命令：`composer install`
-- 配置数据库文件：config/database.php
-- 在根目录下运行命令：`php install.php`
+- Step 1. Run in the project root directory:`composer install`
+- Step 2. Run in the config folder:`cp database.sample.php database.php`, and then go to edit it.
+- Step 3. Run in the project root directory:`php install.php`
 
-### Apache 配置
+### Apache Configuration
 
-- 本项目自带Apache配置，无需另外手动配置。
+- The project comes with Apache configuration, no separate manual configuration is required.
 
-### Nginx 配置
+### Nginx Configuration
 
-- 配置Rewrites的规则
+- Configure Rewrites rules:
 
 ```
 server {
