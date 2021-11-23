@@ -4,7 +4,7 @@ namespace App\Functions;
 
 class Helper
 {
-    const VERSION = '0.0.1';
+    const VERSION = '0.0.3';
 
     /**
      * @param string $type
@@ -15,22 +15,27 @@ class Helper
         if ($type === 'app') {
             $version = self::VERSION;
         } else if ($type === 'mysql') {
-            $pdo = new Connect();
-            return $pdo->db->getAttribute(\PDO::ATTR_SERVER_VERSION);
+            return (new Database())->version();
         }
 
         return $version ?? null;
     }
 
     /**
-     * @param int $number
+     * Text output.
      */
-    public static function create_text_output(int $number)
+    public static function create_text_output()
     {
         $date = date('Y-m-d H:i:s');
-        printf("[%s] 数据 %d 创建成功\n", $date, $number);
+        printf("[%s] ✔ Created Successfully.\n", $date);
     }
 
+    /**
+     * @param int $status_code
+     * @param string $text
+     * @param array $data
+     * @return false|string
+     */
     public static function response(int $status_code = 200, string $text = 'success', array $data = [])
     {
         $result = [
@@ -40,6 +45,24 @@ class Helper
         ];
 
         return json_encode($result);
+    }
+
+    /**
+     * Check the environment.
+     */
+    public static function check_environment()
+    {
+        if (!version_compare(PHP_VERSION, '7.4.0', '>=')) {
+            exit('✘ PHP version is not supported.' . PHP_EOL);
+        }
+
+        if (file_exists(__DIR__ . '/../../install/install.lock')) {
+            exit('✘ The program has already been installed. To reinstall, please delete the relevant files and execute it again.' . PHP_EOL);
+        }
+
+        if (floatval(self::version('mysql')) < 5.6) {
+            exit('✘ MySQL version is too low.' . PHP_EOL);
+        }
     }
 
     /**

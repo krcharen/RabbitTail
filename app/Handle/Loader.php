@@ -17,7 +17,7 @@ class Loader extends Database
 
         if (strlen($prase_uri[0]) === 7) {
             $short_code = trim($prase_uri[0]);
-            $url_sql = "SELECT `url` FROM `tail_link` WHERE `short_code` = '{$short_code}' AND `deleted_at` IS NULL;";
+            $url_sql = "SELECT `url` FROM `tail_links` WHERE `short_code` = '{$short_code}' AND `deleted_at` IS NULL;";
             $select = $this->rawSelect($url_sql);
             $url = current($select)['url'];
             $redirect_to = $url ?: '/';

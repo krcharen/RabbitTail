@@ -6,6 +6,23 @@ class Database extends Connect
 {
 
     /**
+     * @return mixed
+     */
+    public function version()
+    {
+        return $this->db->getAttribute(\PDO::ATTR_SERVER_VERSION);
+    }
+
+    /**
+     * @param string $key
+     * @return mixed|string
+     */
+    public function readConfig(string $key)
+    {
+        return $this->config[$key] ?? '';
+    }
+
+    /**
      * @param string $sql
      * @return mixed
      */

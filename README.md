@@ -4,6 +4,13 @@
 
 `Rabbit Tail (Chinese：短尾巴兔子🐇)` Mainly used to shorten URL links. Convert long links into short links.
 
+### Installation Environment
+
+`PHP >= 7.4`
+
+`MySQL >= 5.6 (Recommend 5.7)`
+
+
 ### Install
 
 - Step 1. Run in the project root directory:`composer install`

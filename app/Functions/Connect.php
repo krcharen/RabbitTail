@@ -9,12 +9,12 @@ class Connect
     /**
      * @var array
      */
-    private array $config = [];
+    protected array $config = [];
 
     /**
      * @var
      */
-    public $db;
+    protected $db;
 
     /**
      * Connect constructor.
@@ -27,7 +27,7 @@ class Connect
     }
 
     /**
-     *
+     * Load database file.
      */
     private function load()
     {

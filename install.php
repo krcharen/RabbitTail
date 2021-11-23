@@ -2,31 +2,23 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-if (!version_compare(PHP_VERSION, '7.4.0', '>=')) {
-    exit('PHP版本不支持' . PHP_EOL);
-}
-
 if (PHP_SAPI !== 'cli') {
     Header("Location:/");
 }
 
-if (file_exists('./install/install.lock')) {
-    exit('已执行过安装, 要重新安装请删除相关文件后再执行' . PHP_EOL);
-}
-
 $helper = new \App\Functions\Helper();
-
-if (floatval($helper::version('mysql')) < 5.6) {
-    exit('MySQL版本太低' . PHP_EOL);
-}
+$helper::check_environment();
 
 $db = new \App\Functions\Database();
-$db_table_data = explode(";\r", file_get_contents('./install/db/mysql.sql'));
+$prefix = $db->readConfig('prefix');
 
-foreach ($db_table_data as $key => $sql) {
+$db_data_file = explode(";\r", file_get_contents('./install/db/mysql.sql'));
+
+foreach ($db_data_file as $key => $sql) {
     if ($sql_string = trim(str_replace(["\r", "\n", "\t"], '', $sql))) {
-        $db->rawCreate($sql_string);
-        $helper::create_text_output($key + 1);
+        $sql = str_replace('{@}', $prefix, $sql_string);
+        $db->rawCreate($sql);
+        $helper::create_text_output();
     }
 }
 

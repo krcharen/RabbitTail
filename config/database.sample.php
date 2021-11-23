@@ -7,9 +7,8 @@ return [
         'database' => '',
         'username' => '',
         'password' => '',
-        'unix_socket' => '',
+        'prefix' => 'tail_',
         'charset' => 'utf8',
-        'collation' => 'utf8_general_ci',
-        'prefix' => '',
+        'collation' => 'utf8_general_ci'
     ],
 ];
