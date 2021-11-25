@@ -18,7 +18,6 @@ foreach ($db_data_file as $key => $sql) {
     if ($sql_string = trim(str_replace(["\r", "\n", "\t"], '', $sql))) {
         $sql = str_replace('{@}', $prefix, $sql_string);
         $db->rawCreate($sql);
-        $helper::create_text_output();
     }
 }
 
@@ -28,8 +27,8 @@ if ($done) {
     $location = $helper::app_config('app_url');
     $admin = new \App\Handle\Rabbit();
     $admin->init_admin($helper::app_config('admin'));
-
-    printf("\n✎ Welcome to the Rabbit Tail Short URL platform.\nHome Page:$location \nAdmin Page:$location/admin\n");
+    $helper::create_text_output();
+    printf("\n✎ Welcome to the Rabbit Tail Short URL platform.\nHome Page:$location \nAdmin Page:$location/admin\n\n");
 } else {
-    printf("\n✎ System installation failed.No permission to create files.\n");
+    printf("\n✎ System installation failed.No permission to create files.\n\n");
 }
