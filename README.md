@@ -1,6 +1,7 @@
 # Rabbit Tail (Short URL)
 
-### Introduction
+[![License](https://img.shields.io/github/license/krcharen/RabbitTail?style=flat-square)](LICENSE)
+![PHP Version](https://img.shields.io/badge/PHP-%3E=7.4-brightgreen.svg?maxAge=2592000)
 
 `Rabbit Tail (Chinese：短尾巴兔子🐇)` Mainly used to shorten URL links. Convert long links into short links.
 

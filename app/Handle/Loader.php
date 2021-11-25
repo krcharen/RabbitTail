@@ -15,7 +15,7 @@ class Loader extends Database
             Header("Location:/");
         }
 
-        if (strlen($prase_uri[0]) === 7) {
+        if (strlen($prase_uri[0]) === 8) {
             $short_code = trim($prase_uri[0]);
             $url_sql = "SELECT `url` FROM `tail_links` WHERE `short_code` = '{$short_code}' AND `deleted_at` IS NULL;";
             $select = $this->rawSelect($url_sql);

@@ -22,4 +22,14 @@ foreach ($db_data_file as $key => $sql) {
     }
 }
 
-file_put_contents('./install/install.lock', '[' . date('Y-m-d H:i:s') . '] Created At.');
+$done = file_put_contents('./install/install.lock', '[' . date('Y-m-d H:i:s') . '] Created At.');
+
+if ($done) {
+    $location = $helper::app_config('app_url');
+    $admin = new \App\Handle\Rabbit();
+    $admin->init_admin($helper::app_config('admin'));
+
+    printf("\n✎ Welcome to the Rabbit Tail Short URL platform.\nHome Page:$location \nAdmin Page:$location/admin\n");
+} else {
+    printf("\n✎ System installation failed.No permission to create files.\n");
+}
