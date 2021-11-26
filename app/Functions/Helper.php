@@ -24,12 +24,18 @@ class Helper
     }
 
     /**
-     * Text output.
+     * @param $done
+     * @param $total
+     * @param string $text
+     * @param int $width
+     * @return string
      */
-    public static function create_text_output()
+    public static function cli_progress_bar($done, $total, $text = '', $width = 50)
     {
-        $date = date('Y-m-d H:i:s');
-        printf("[%s] ✔ Created Successfully.\n", $date);
+        $per = round(($done * 100) / $total);
+        $bar = round(($width * $per) / 100);
+
+        return sprintf("%s%% [%s>%s] %s/%s %s\r", $per, str_repeat("=", $bar), str_repeat(" ", $width - $bar), $done, $total, $text);
     }
 
     /**
@@ -55,15 +61,15 @@ class Helper
     public static function check_environment()
     {
         if (!version_compare(PHP_VERSION, '7.4.0', '>=')) {
-            exit('✘ PHP version is not supported.' . PHP_EOL);
+            exit('[Error] PHP version is not supported.' . PHP_EOL);
         }
 
         if (file_exists(__DIR__ . '/../../install/install.lock')) {
-            exit('✘ The program has already been installed. To reinstall, please delete the relevant files and execute it again.' . PHP_EOL);
+            exit('[Error] The program has already been installed. To reinstall, please delete the relevant files and execute it again.' . PHP_EOL);
         }
 
         if (floatval(self::version('mysql')) < 5.6) {
-            exit('✘ MySQL version is too low.' . PHP_EOL);
+            exit('[Error] MySQL version is too low.' . PHP_EOL);
         }
     }
 

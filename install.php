@@ -13,11 +13,15 @@ $db = new \App\Functions\Database();
 $prefix = $db->readConfig('prefix');
 
 $db_data_file = explode(";\r", file_get_contents('./install/db/mysql.sql'));
+$total = count($db_data_file);
+
+echo PHP_EOL . 'Start to install:' . PHP_EOL . PHP_EOL;
 
 foreach ($db_data_file as $key => $sql) {
     if ($sql_string = trim(str_replace(["\r", "\n", "\t"], '', $sql))) {
         $sql = str_replace('{@}', $prefix, $sql_string);
         $db->rawCreate($sql);
+        echo $helper::cli_progress_bar((($key + 1) / $total) * 100, 100);
     }
 }
 
@@ -27,8 +31,7 @@ if ($done) {
     $location = $helper::app_config('app_url');
     $admin = new \App\Handle\Rabbit();
     $admin->init_admin($helper::app_config('admin'));
-    $helper::create_text_output();
-    printf("\n✎ Welcome to the Rabbit Tail Short URL platform.\nHome Page:$location \nAdmin Page:$location/admin\n\n");
+    printf("\n\nWelcome to the Rabbit Tail Short URL platform.\nHome  Page:$location \nAdmin Page:$location/admin\n\n");
 } else {
-    printf("\n✎ System installation failed.No permission to create files.\n\n");
+    printf("\nSystem installation failed.No permission to create files.\n\n");
 }
