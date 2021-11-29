@@ -7,4 +7,11 @@ return [
         'password' => 'admin',
         'email' => 'admin@localhost.com'
     ],
+    'footer' => [
+        'copyright' => '',
+        'site_record_number' => '',
+        'contact' => [
+            'email' => ''
+        ]
+    ]
 ];

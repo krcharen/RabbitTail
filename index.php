@@ -21,7 +21,7 @@ $loader->load($uri);
 
         .main {
             width: 100%;
-            height: 630px;
+            height: 850px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -62,6 +62,17 @@ $loader->load($uri);
             height: 200px;
             border-radius: 6px;
             padding: 5px 10px;
+        }
+
+        .main .footer {
+            margin-top: 100px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .main .footer > p > a {
+            color: #666;
+            text-decoration: none;
         }
 
     </style>
@@ -109,10 +120,13 @@ $loader->load($uri);
     </div>
     <div class="enter">
         <input type="text" id="url" value="" class="form-control" placeholder="长连接网址（必须包含http(s)）" required>
-        <button type="button" class="btn btn-primary" onclick="generate();">生成链接</button>
+        <button type="button" class="btn btn-primary" onclick="generate();">缩短网址</button>
     </div>
     <div class="shadow p-3 mb-5 bg-body rounded show">
         <span id="content"></span>
+    </div>
+    <div class="footer">
+        <p>©<?php echo date('Y'); ?>&nbsp;&nbsp;Rabbit Tail's Shorter URL&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://github.com/krcharen/RabbitTail" target='_blank'>GitHub</a></p>
     </div>
 </div>
 </body>
