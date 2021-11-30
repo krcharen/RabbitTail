@@ -9,13 +9,13 @@
 
 `PHP >= 7.4`
 
-`MySQL >= 5.6 (Recommend 5.7)`
+`MySQL >= 5.6`
 
 
 ### Install
 
 - Step 1. Run in the project root directory:`composer install`
-- Step 2. Run in the config folder:`cp database.sample.php database.php`, and then go to edit it.
+- Step 2. Run in the config folder:`cp database.sample.php database.php`
 - Step 3. Run in the project root directory:`php install.php`
 
 ### Apache Configuration

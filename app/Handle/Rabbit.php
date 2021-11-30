@@ -32,6 +32,6 @@ class Rabbit
             exit('[Error] Administrator creation failed.');
         }
 
-        printf("The administrator created successfully:\nAccount: %s\nPassword: %s\n", $admin['username'], $password);
+        printf("The administrator created successfully:\nAccount: %s\nPassword: %s\n", $admin['username'], $admin['password']);
     }
 }
