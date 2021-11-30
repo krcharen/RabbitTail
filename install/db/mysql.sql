@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `{@}users`;
+
 CREATE TABLE `{@}users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(64) DEFAULT NULL,
@@ -9,6 +11,8 @@ CREATE TABLE `{@}users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `{@}keys`;
+
 CREATE TABLE `{@}keys` (
    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
    `user_id` int(11) unsigned DEFAULT NULL,
@@ -18,6 +22,8 @@ CREATE TABLE `{@}keys` (
    `deleted_at` datetime DEFAULT NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `{@}links`;
 
 CREATE TABLE `{@}links` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -30,6 +36,8 @@ CREATE TABLE `{@}links` (
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `{@}options`;
 
 CREATE TABLE `{@}options` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

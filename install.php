@@ -21,17 +21,18 @@ foreach ($db_data_file as $key => $sql) {
     if ($sql_string = trim(str_replace(["\r", "\n", "\t"], '', $sql))) {
         $sql = str_replace('{@}', $prefix, $sql_string);
         $db->rawCreate($sql);
-        echo $helper::cli_progress_bar((($key + 1) / $total) * 100, 100);
+        echo $helper::cli_progress_bar(round((($key + 1) / $total) * 100, 2), 100);
     }
 }
 
 $done = file_put_contents('./install/install.lock', '[' . date('Y-m-d H:i:s') . '] Created At.');
 
 if ($done) {
+    echo PHP_EOL . PHP_EOL;
     $location = $helper::app_config('app_url');
     $admin = new \App\Handle\Rabbit();
     $admin->init_admin($helper::app_config('admin'));
-    printf("\n\nWelcome to the Rabbit Tail Short URL platform.\nHome  Page:$location \nAdmin Page:$location/admin\n\n");
+    printf("\nWelcome to the Rabbit Tail Short URL platform.\nHome  Page: $location \nAdmin Page: $location/admin\n\n");
 } else {
     printf("\nSystem installation failed.No permission to create files.\n\n");
 }

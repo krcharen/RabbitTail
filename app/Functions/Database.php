@@ -2,8 +2,20 @@
 
 namespace App\Functions;
 
+use App\Exceptions\Exception;
+
 class Database extends Connect
 {
+
+    /**
+     * Database constructor.
+     * @throws Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    }
 
     /**
      * @return mixed
@@ -63,6 +75,16 @@ class Database extends Connect
     public function rawInsert(string $sql)
     {
         return $this->db->exec($sql);
+    }
+
+    /**
+     * @param string $sql
+     * @param array $parameters
+     * @return mixed
+     */
+    public function preExecute(string $sql, array $parameters)
+    {
+        return $this->db->prepare($sql)->execute($parameters);
     }
 
     /**
