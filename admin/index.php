@@ -1,4 +1,30 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$action = trim($_GET['action'] ?? 'index');
+
+if (!in_array($action, ['login', 'index'], true)) {
+    $reload = "<script type='text/javascript'>window.location = '/admin'</script>";
+    exit($reload);
+}
+
+switch ($action) {
+    case 'login':
+        $username = trim($_POST['username'] ?? '');
+        $password = trim($_POST['password'] ?? '');
+
+        if ($username && $password) {
+            $helper = new \App\Functions\Helper();
+            $staus = $helper::login($username, $password);
+
+            if ($staus) {
+                exit(json_encode(['staus' => 200, 'message' => 'success']));
+            } else {
+                exit(json_encode(['staus' => 400, 'message' => 'failure']));
+            }
+        }
+        break;
+}
 
 ?>
 
@@ -62,6 +88,42 @@
             flex: 0.9;
         }
     </style>
+    <script>
+        function login() {
+            let username = $('#username').val();
+            let password = $('#password').val();
+            if (username.length && password.length) {
+                $.ajax({
+                    url: '?action=login',
+                    type: 'POST',
+                    cache: false,
+                    data: {'username': username, 'password': password},
+                    success: function (data) {
+                        let result = JSON.parse(data)
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        if (result.staus === 200) {
+                            window.location = '/admin/Views/Home.php';
+                        } else {
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Login failed.The username or password is wrong!'
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="login">
@@ -71,17 +133,18 @@
                 <span>LOGIN</span>
             </div>
             <div class="login-box-form">
-                <form autocomplete="off">
+                <form autocomplete="off" onsubmit="return false">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" required>
-                        <div id="username_tip" class="form-text">Enter the username after the system is installed.</div>
+                        <div id="username_tip" class="form-text">Enter the username after the system is installed.
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">SUBMIT</button>
+                    <button type="submit" class="btn btn-primary" onclick="login()">SUBMIT</button>
                 </form>
             </div>
         </div>

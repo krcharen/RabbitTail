@@ -2,6 +2,7 @@
 
 namespace App\Functions;
 
+use Admin\Controllers\Login;
 use App\Exceptions\Exception;
 
 class Helper
@@ -193,5 +194,20 @@ class Helper
         ];
 
         return isset($headers_desc[$code]) ? $headers_desc[$code] : '';
+    }
+
+    /**
+     * @param string $username
+     * @param string $password
+     * @return bool
+     * @throws Exception
+     */
+    public static function login(string $username = '', string $password = '')
+    {
+        if (empty($username) || empty($password)) throw new Exception('Error: Invalid username or password.');
+
+        $login = new Login($username, $password);
+
+        return $login->handle();
     }
 }

@@ -44,4 +44,24 @@ class Core
 
         return $decimal;
     }
+
+    /**
+     * @return string
+     */
+    public function token()
+    {
+        $hash_str = '';
+
+        for ($i = 0; $i < mt_rand(1000, 2000); ++$i) {
+            $hash_str .= md5(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/') . microtime(true));
+        }
+
+        if (strlen($hash_str) > 1024) {
+            $hash = md5(substr($hash_str, 0, 1023));
+        } else {
+            $this->token();
+        }
+
+        return $hash;
+    }
 }
