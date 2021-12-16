@@ -2,12 +2,16 @@
 
 namespace App\Handle;
 
+use App\Api\ApiController;
 use App\Functions\Database;
 use App\Functions\Helper;
 
 class Loader extends Database
 {
 
+    /**
+     * @param string $uri
+     */
     public function load(string $uri)
     {
         $prase_uri = explode('/', trim($uri, '/'));
@@ -38,6 +42,40 @@ class Loader extends Database
                 $this->redirect_by_javascript($redirect_to);
             }
         }
+    }
+
+    /**
+     * @param string $api
+     * @return ApiController|array
+     */
+    public function api(string $api = '')
+    {
+
+        $content_type = $_SERVER['CONTENT_TYPE'] ?? '';
+
+        if ($content_type !== 'application/json') {
+            return ['staus' => 405, 'message' => 'Header Error.'];
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return ['staus' => 405, 'message' => 'Request Method Error.'];
+        }
+
+        if (empty($api)) {
+            return ['staus' => 405, 'message' => 'Api Request Error.'];
+        }
+
+        $contents = file_get_contents('php://input');
+
+        $parameter = json_decode($contents, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE || count($parameter) === 0) {
+            return ['staus' => 405, 'message' => 'Parameter Error.'];
+        }
+
+        $api_call = new ApiController();
+
+        return $api_call->call($api, $parameter);
     }
 
     /**

@@ -2,8 +2,19 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 $uri = $_SERVER['REQUEST_URI'];
-$loader = new \App\Handle\Loader();
-$loader->load($uri);
+$request_uri = explode('/', $uri);
+
+switch ($request_uri[1]) {
+    case 'api':
+        $loader = new \App\Handle\Loader();
+        $result = $loader->api($request_uri[2] ?? '');
+        exit(json_encode($result, 64));
+        break;
+    default:
+        $loader = new \App\Handle\Loader();
+        $loader->load($uri);
+        break;
+}
 
 ?>
 <!doctype html>
