@@ -171,7 +171,7 @@ switch ($request_uri[1]) {
             <ul class="api-doc">
                 <li>
                     <p>URL</p>
-                    <p><code><?php echo $domain; ?>/shorter</code></p>
+                    <p><code><?php echo $domain; ?>/api/shorter</code></p>
                 </li>
                 <li>
                     <p>Method</p>
