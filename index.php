@@ -2,6 +2,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 $uri = $_SERVER['REQUEST_URI'];
+$domain = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
 $request_uri = explode('/', $uri);
 
 switch ($request_uri[1]) {
@@ -66,7 +67,7 @@ switch ($request_uri[1]) {
             margin-left: 30px;
         }
 
-        .main .show {
+        .main .content-show {
             background-color: #f8f9fa !important;
             margin-top: 40px;
             width: 30%;
@@ -84,6 +85,31 @@ switch ($request_uri[1]) {
         .main .footer > p > a {
             color: #666;
             text-decoration: none;
+        }
+
+        .api {
+            cursor: pointer;
+        }
+
+        .api-doc-show {
+            width: 500px;
+        }
+
+        .api-doc {
+            font-size: 12px;
+            list-style-type: none;
+        }
+
+        .api-doc > li {
+            display: flex;
+        }
+
+        .api-doc > li > p:first-child {
+            flex: 0.2;
+        }
+
+        .api-doc > li > p:last-child {
+            flex: 0.8;
         }
 
     </style>
@@ -133,11 +159,53 @@ switch ($request_uri[1]) {
         <input type="text" id="url" value="" class="form-control" placeholder="长连接网址（必须包含http(s)）" required>
         <button type="button" class="btn btn-primary" onclick="generate();">缩短网址</button>
     </div>
-    <div class="shadow p-3 mb-5 bg-body rounded show">
+    <div class="shadow p-3 mb-5 bg-body rounded content-show">
         <span id="content"></span>
     </div>
+    <div class="offcanvas offcanvas-end api-doc-show" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">API Doc</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="api-doc">
+                <li>
+                    <p>URL</p>
+                    <p><code><?php echo $domain; ?>/shorter</code></p>
+                </li>
+                <li>
+                    <p>Method</p>
+                    <p><code>POST</code></p>
+                </li>
+                <li>
+                    <p>Headers</p>
+                    <p><code>Content-Type:application/json</code></p>
+                </li>
+                <li>
+                    <p>Format</p>
+                    <p><code>JSON</code></p>
+                </li>
+                <li>
+                    <p></p>
+                    <p><code>Field:url Type:string</code></p>
+                </li>
+                <li>
+                    <p>Request Demo</p>
+                    <p><code>{"url":"http://www.demo.com"}</code></p>
+                </li>
+                <li>
+                    <p>Response Demo</p>
+                    <p><code>{"staus":200,"message":"success","data":{"url":"..."}}</code></p>
+                </li>
+                <li>
+                    <p>Call Restriction</p>
+                    <p><span style="font-weight: bold;">Unlimited</span></p>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="footer">
-        <p>©<?php echo date('Y'); ?>&nbsp;&nbsp;Rabbit Tail's Shorter URL&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://github.com/krcharen/RabbitTail" target='_blank'>GitHub</a></p>
+        <p>©<?php echo date('Y'); ?>&nbsp;&nbsp;Rabbit Tail's Shorter URL&nbsp;&nbsp;|&nbsp;&nbsp;<a class="api" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">API</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://github.com/krcharen/RabbitTail" target='_blank'>GitHub</a></p>
     </div>
 </div>
 </body>
